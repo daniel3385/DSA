@@ -3,6 +3,7 @@
 #include <string.h>
 #include "genericSort.h"
 
+#define arrayStudentSize 5
 
 struct Student {
   int grade;
@@ -62,7 +63,7 @@ int main() {
   printf("\n");
 
 
-  struct Student arrayStudents[4];
+  struct Student arrayStudents[arrayStudentSize];
   arrayStudents[0].grade = 7;
   strcpy(arrayStudents[0].name, "Bob");
   arrayStudents[1].grade = 5;
@@ -74,7 +75,6 @@ int main() {
   arrayStudents[4].grade = 6;
   strcpy(arrayStudents[4].name, "Davi");
 
-  int arrayStudentSize = 5;
   int k = 0;
   printf("Before sort by grade:\n");
   while(k < arrayStudentSize) {

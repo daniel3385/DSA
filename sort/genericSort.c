@@ -13,7 +13,7 @@ void insertSort(void *arr, int numberElements, int sizeElement, int (*compare)(c
   int i, j;
   key = malloc(sizeElement);
   for(j = 1; j < numberElements; j++) {
-    int i = j - 1;
+    i = j - 1;
     memcpy(key, &(array[j*sizeElement]), sizeElement);
     while( (i >= 0) && (compare(&array[i*sizeElement], key) > 0) ) {
       memcpy(&array[(i+1)*sizeElement], &array[i*sizeElement], sizeElement);     
