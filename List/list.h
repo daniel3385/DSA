@@ -3,26 +3,25 @@
 
 
 typedef struct node {
-    int num;
+    void *data;
     struct node *next;
 } Node, *NodePtr;
 
 typedef struct list {
     NodePtr head;
     NodePtr tail;
+    int sizeData; 
 } List, *ListPtr; 
 
-ListPtr ListNew(void);
-
-NodePtr ListMakeNode(int); 
+ListPtr ListNew(int);
 
 int ListDeleteNode(ListPtr, NodePtr);
 
-int ListAddHead(ListPtr, int);
+int ListAddHead(ListPtr, void *);
 
-int ListAddTail(ListPtr, int);
+int ListAddTail(ListPtr, void *);
 
-void ListToString(ListPtr);
+void ListToString(ListPtr, void (*)(void *));
 
 
 #endif

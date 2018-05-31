@@ -1,27 +1,24 @@
 #include "list.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 
-ListPtr ListNew() {
+ListPtr ListNew(int sizeData) {
     ListPtr list = malloc(sizeof(List));
     list->head = NULL;
     list->tail = NULL;
+    list->sizeData = sizeData;
     return list;
 }
 
-NodePtr ListMakeNode(int n) {
-    NodePtr node = malloc(sizeof(Node));
-    node->num = n;
-    node->next = NULL;
-    return node;
-}
 
 int ListDeleteNode(ListPtr list, NodePtr node) {
     NodePtr runner = list->head;
         if(runner == node) {
             // delete the head
             list->head = list->head->next;
+            free(runner->data);
             free(runner);
             return 1;
         }
@@ -29,6 +26,7 @@ int ListDeleteNode(ListPtr list, NodePtr node) {
         if(runner->next == node) {
             NodePtr tmp = node;
             runner->next = node->next;
+            free(tmp->data);
             free(tmp);
             return 1;
         } else {
@@ -38,24 +36,25 @@ int ListDeleteNode(ListPtr list, NodePtr node) {
     return 0;
 }
 
-int ListAddHead(ListPtr list, int num) {
-    NodePtr node = ListMakeNode(num);
+int ListAddHead(ListPtr list, void *data) {
+    NodePtr node = malloc(sizeof(Node));
+    node->data = malloc(list->sizeData);
+    memcpy(node->data, data, list->sizeData);
     if(list->tail == NULL) {
         // it is the first node
         list->tail = node;
         list->head = node;
-        node->num = num;
     } else {
-        node->num = num;
         node->next = list->head;
         list->head = node;
     }
     return 1;
 }
 
-int ListAddTail(ListPtr list, int num) {
-    NodePtr node = ListMakeNode(num);
-    node->num = num;
+int ListAddTail(ListPtr list, void *data) {
+    NodePtr node = malloc(sizeof(Node));
+    node->data = malloc(list->sizeData);
+    memcpy(node->data, data, list->sizeData);
     if(list->head == NULL) {
         // it is the first node
         list->head = node;
@@ -67,17 +66,11 @@ int ListAddTail(ListPtr list, int num) {
     return 1;
 }
 
-void ListToString(ListPtr list) {
+void ListToString(ListPtr list, void (*f)(void *)) {
     NodePtr runner = list->head;
     printf("\n");
     while(runner != NULL) {
-        if(runner->next != NULL) {
-            // It's not the last node
-            printf("(%d)->", runner->num);
-        } else {
-            // It's the last node
-            printf("(%d)", runner->num);
-        }
+            f(runner->data);
         runner = runner->next;
     }
     printf("\n");
