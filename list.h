@@ -4,6 +4,7 @@
 
 typedef struct node {
     void *data;
+    struct node *prev;
     struct node *next;
 } Node, *NodePtr;
 
@@ -15,7 +16,7 @@ typedef struct list {
 
 ListPtr ListNew(int);
 
-int ListDeleteNode(ListPtr, NodePtr);
+void ListDeleteNode(ListPtr, NodePtr, void *);
 
 int ListAddHead(ListPtr, void *);
 

@@ -13,27 +13,37 @@ ListPtr ListNew(int sizeData) {
 }
 
 
-int ListDeleteNode(ListPtr list, NodePtr node) {
-    NodePtr runner = list->head;
-        if(runner == node) {
-            // delete the head
-            list->head = list->head->next;
-            free(runner->data);
-            free(runner);
-            return 1;
-        }
-    while(runner->next != NULL) {
-        if(runner->next == node) {
-            NodePtr tmp = node;
-            runner->next = node->next;
-            free(tmp->data);
-            free(tmp);
-            return 1;
-        } else {
-            runner = runner->next;
+void ListDeleteNode(ListPtr list, NodePtr node, void *data) {
+    if(node == list->tail) {
+        memcpy(data, list->tail->data, list->sizeData);
+        free(list->tail->data);
+        NodePtr tmp;
+        tmp = list->tail;
+        list->tail = list->tail->prev;
+        list->tail->next = NULL;
+        free(tmp);
+    } else if(node == list->head) {
+        memcpy(data, list->head->data, list->sizeData);
+        free(list->head->data);
+        NodePtr tmp;
+        tmp = list->head;
+        list->head->next->prev = NULL;
+        list->head = list->head->next;
+        free(tmp);
+    } else {
+        // FIXME: this else is broken
+        NodePtr runner = list->head;
+        while(runner != NULL) {
+            if(runner == node) {
+                memcpy(data, runner, list->sizeData);
+                runner->prev->next = runner->next;
+                free(runner->data);
+                free(runner);
+            } else {
+                runner = runner->next;
+            }
         }
     }
-    return 0;
 }
 
 int ListAddHead(ListPtr list, void *data) {
@@ -46,6 +56,7 @@ int ListAddHead(ListPtr list, void *data) {
         list->head = node;
     } else {
         node->next = list->head;
+        list->head->prev = node;
         list->head = node;
     }
     return 1;
@@ -61,6 +72,7 @@ int ListAddTail(ListPtr list, void *data) {
         list->tail = node;
     } else {
         list->tail->next = node;
+        node->prev = list->tail;
         list->tail = node;
     }
     return 1;
