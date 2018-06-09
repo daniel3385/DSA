@@ -1,5 +1,7 @@
 CC=gcc -Wall -Werror -g
 
+all: list queue 
+
 list:
 	$(CC) -c list.c
 	$(CC) -c listExample.c
@@ -12,12 +14,6 @@ stack:
 	$(CC) -c stack.c
 	$(CC) -c stackExample.c
 	$(CC) -o stackExample ../List/list.o stack.o stackExample.o
-
-
-all:
-	list
-	queue
-	stack
 
 clean:
 	rm *.o queueExample
