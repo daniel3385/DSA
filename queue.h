@@ -1,7 +1,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "../List/list.h"
+#include "list.h"
 
 typedef struct list Queue;
 typedef struct list *QueuePtr;

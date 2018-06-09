@@ -1,4 +1,4 @@
-#include "../List/list.h"
+#include "list.h"
 #include "queue.h"
 
 QueuePtr QueueNew(int sizeData) {
