@@ -1,22 +1,22 @@
-#include "../List/list.h"
+#include "list.h"
 #include "stack.h"
 
-StackPtr StackNew() {
-    return ListNew();
+StackPtr StackNew(int size) {
+    return ListNew(size);
 }
 
-int StackPush(StackPtr q, int num) {
-    return ListAddHead(q, num);
+int StackPush(StackPtr s, void *data) {
+    return ListAddHead(s, data);
 }
 
-int StackPop(StackPtr q) {
-    int num = q->head->num;
-    ListDeleteNode(q, q->head);
-    return num;
+void StackPop(StackPtr s, void **data) {
+    ListDeleteNode(s, s->head, data);
+    return;
 }
 
-void StackToString(StackPtr q) {
-    ListToString(q);
+void StackToString(StackPtr s, void (*f)(void *)) {
+    ListToString(s, f);
+    return;
 }
 
 

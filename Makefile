@@ -1,19 +1,19 @@
 CC=gcc -Wall -Werror -g
 
-all: list queue 
+all: list queue stack
 
-list:
+list: list.c listExample.c
 	$(CC) -c list.c
 	$(CC) -c listExample.c
 	$(CC) -o listExample list.o listExample.o
-queue:
+queue: queue.c queueExample.c
 	$(CC) -c queue.c
 	$(CC) -c queueExample.c
 	$(CC) -o queueExample list.o queue.o queueExample.o
-stack:
+stack: stack.c stackExample.c
 	$(CC) -c stack.c
 	$(CC) -c stackExample.c
-	$(CC) -o stackExample ../List/list.o stack.o stackExample.o
+	$(CC) -o stackExample list.o stack.o stackExample.o
 
 clean:
 	rm *.o queueExample
