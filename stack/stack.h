@@ -1,14 +1,13 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "list.h"
+#include "../list/list.h"
 
-typedef struct list Stack;
-typedef struct list *StackPtr;
+typedef ListPtr StackPtr;
 
-StackPtr StackNew(int);
-int StackPush(StackPtr, void *);
-void StackPop(StackPtr, void **);
-void StackToString(StackPtr, void (*)(void *));
+StackPtr StackNew(int size);
+int StackPush(StackPtr s, void *data);
+void StackPop(StackPtr s, void **data);
+void StackToString(StackPtr s, void (*f)(void *));
 
 #endif
