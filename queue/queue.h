@@ -5,9 +5,9 @@
 
 #define QueuePtr ListPtr
 
-ListPtr QueueNew(int sizeData);
-int QueueEnqueue(ListPtr q,  void *data);
-void QueueDequeue(ListPtr q, void **data);
-void QueueToString(ListPtr q, void (*f)(void *));
+QueuePtr QueueNew(int sizeData);
+int QueueEnqueue(QueuePtr q,  void *data);
+void QueueDequeue(QueuePtr q, void **data);
+void QueueToString(QueuePtr q, void (*f)(void *));
 
 #endif
