@@ -1,22 +1,18 @@
 CC=gcc -Wall -Werror -g
 
-all: list queue stack
+all: List Queue Stack
 
-list: list.c listExample.c
-	$(CC) -c list.c
-	$(CC) -c listExample.c
-	$(CC) -o listExample list.o listExample.o
-queue: queue.c queueExample.c
-	$(CC) -c queue.c
-	$(CC) -c queueExample.c
-	$(CC) -o queueExample list.o queue.o queueExample.o
-stack: stack.c stackExample.c
-	$(CC) -c stack.c
-	$(CC) -c stackExample.c
-	$(CC) -o stackExample list.o stack.o stackExample.o
+List: 
+	cd list; make  
+
+Queue: 
+	cd queue; make
+
+Stack: 
+	cd stack; make
 
 clean:
-	rm *.o queueExample
-	rm *.o listExample
-	rm *.o stackExample
+	cd list; make clean
+	cd queue; make clean
+	cd stack; make clean
 
