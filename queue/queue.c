@@ -1,20 +1,20 @@
-#include "list.h"
+#include "../list/list.h"
 #include "queue.h"
 
-QueuePtr QueueNew(int sizeData) {
+ListPtr QueueNew(int sizeData) {
     return ListNew(sizeData);
 }
 
-int QueueEnqueue(QueuePtr q,  void *data) {
+int QueueEnqueue(ListPtr q,  void *data) {
     return ListAddHead(q, data);
 }
 
-void QueueDequeue(QueuePtr q, void **data) {
+void QueueDequeue(ListPtr q, void **data) {
     ListDeleteNode(q, q->tail, data);
     return;
 }
 
-void QueueToString(QueuePtr q, void (*f)(void *)) {
+void QueueToString(ListPtr q, void (*f)(void *)) {
     ListToString(q, f);
     return;
 }

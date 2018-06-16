@@ -1,14 +1,13 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "list.h"
+#include "../list/list.h"
 
-typedef struct list Queue;
-typedef struct list *QueuePtr;
+#define QueuePtr ListPtr
 
-QueuePtr QueueNew(int);
-int QueueEnqueue(QueuePtr, void *);
-void QueueDequeue(QueuePtr, void **);
-void QueueToString(QueuePtr, void (*)(void *));
+ListPtr QueueNew(int sizeData);
+int QueueEnqueue(ListPtr q,  void *data);
+void QueueDequeue(ListPtr q, void **data);
+void QueueToString(ListPtr q, void (*f)(void *));
 
 #endif
