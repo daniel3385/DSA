@@ -1,6 +1,6 @@
 /*
   insert sort 
-  sort arr, using of size n using compare function
+  sort arr using "compare" function
 */
 #include <stdlib.h>
 #include <string.h>
