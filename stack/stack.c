@@ -9,9 +9,8 @@ int StackPush(StackPtr s, void *data) {
     return ListAddHead(s, data);
 }
 
-void StackPop(StackPtr s, void **data) {
-    ListDeleteNode(s, s->head, data);
-    return;
+int StackPop(StackPtr s, void **data) {
+    return ListDeleteNode(s, s->head, data);
 }
 
 void StackToString(StackPtr s, void (*f)(void *)) {

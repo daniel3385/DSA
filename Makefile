@@ -1,7 +1,9 @@
 CC=gcc -Wall -Werror -g
 
-all: List Queue Stack
+all: Array Queue Stack
 
+Array: 
+	cd array; make
 List: 
 	cd list; make  
 
@@ -12,6 +14,7 @@ Stack:
 	cd stack; make
 
 clean:
+	cd array; make clean
 	cd list; make clean
 	cd queue; make clean
 	cd stack; make clean

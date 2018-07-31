@@ -13,15 +13,23 @@ ListPtr ListNew(int sizeData) {
 }
 
 
-void ListDeleteNode(ListPtr list, NodePtr node, void *data) {
+int ListDeleteNode(ListPtr list, NodePtr node, void *data) {
+    if(node == NULL) {
+	data = NULL;
+	return 0;
+    }
     if(node == list->tail) {
         memcpy(data, list->tail->data, list->sizeData);
         free(list->tail->data);
         NodePtr tmp;
         tmp = list->tail;
         list->tail = list->tail->prev;
-        list->tail->next = NULL;
         free(tmp);
+	if (list->tail != NULL)
+	    list->tail->next = NULL;
+	else
+	    // No more nodes!
+	    list->head = NULL;
     } else if(node == list->head) {
         memcpy(data, list->head->data, list->sizeData);
         free(list->head->data);
@@ -44,6 +52,7 @@ void ListDeleteNode(ListPtr list, NodePtr node, void *data) {
             }
         }
     }
+    return 1;
 }
 
 int ListAddHead(ListPtr list, void *data) {
@@ -76,6 +85,27 @@ int ListAddTail(ListPtr list, void *data) {
         list->tail = node;
     }
     return 1;
+}
+
+void ListRevert(ListPtr list) {
+    // FIXME: case where we have 1 node and 2 nodes.
+    NodePtr slower = list->head;
+    NodePtr faster = list->head->next;
+    NodePtr tmp = faster->next;
+    
+    faster->next = slower;
+    slower->next = NULL;
+    list->tail = slower;
+    slower = faster;
+    faster = tmp;
+
+    while(faster != NULL) {
+	tmp = faster->next;	
+	faster->next = slower;
+	slower = faster;
+	faster = tmp;
+    }
+    list->head = slower;
 }
 
 void ListToString(ListPtr list, void (*f)(void *)) {

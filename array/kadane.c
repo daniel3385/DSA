@@ -45,7 +45,7 @@ int kadaneFind(const int *arr, const int sizeArr)
     return sumCurrent;
 }
 
-void main()
+int main()
 {
     int arr1[] = {1,2,3};
     int arr2[] = {-1,-2,-3,-4};
@@ -57,4 +57,5 @@ void main()
     printf("Result 2: %d\n", result);
     result = kadaneFind(arr3, 4);
     printf("Result 3: %d\n", result);
+    return 0;
 }

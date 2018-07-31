@@ -16,11 +16,13 @@ typedef struct list {
 
 ListPtr ListNew(int);
 
-void ListDeleteNode(ListPtr, NodePtr, void *);
+int ListDeleteNode(ListPtr, NodePtr, void *);
 
 int ListAddHead(ListPtr, void *);
 
 int ListAddTail(ListPtr, void *);
+
+void ListRevert(ListPtr);
 
 void ListToString(ListPtr, void (*)(void *));
 

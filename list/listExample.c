@@ -22,6 +22,8 @@ int main() {
     x = 1;
     ListAddHead(list1, &x);
     ListToString(list1, printList);
+    ListRevert(list1);
+    ListToString(list1, printList);
     
 
 /*
